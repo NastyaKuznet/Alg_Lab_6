@@ -9,16 +9,10 @@ namespace Alg_Lab_6.Model.FolderHashTable.FolderHashFunc.LinkFunc
 {
     public class BitPiFunc : IHashFuncLink
     {
-        private int _size = 200;
-        public int Size
-        {
-            get { return _size; }
-            set { _size = SetSize(value); }
-        }
-        public int Count = 100;
+        public double _const = 0.14;
         public int Hash(int key, int size)
         {
-            return Math.Abs(key >> Size + (int)(Math.PI * 100));
+            return Math.Abs((key >>  SetSize(size)) % size + (int)(Math.PI * _const));
         }
 
         private int SetSize(int val)

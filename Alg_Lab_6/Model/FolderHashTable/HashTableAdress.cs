@@ -14,6 +14,7 @@ namespace Alg_Lab_6.Model.FolderHashTable
         int size;
         IHashFuncAdress hashFunc;
         double loadFactor = 0.75;
+        List<int> clasters = new List<int>();
 
         public HashTableAdress(int lenghtMassive, IHashFuncAdress hashFunc)
         {
@@ -29,18 +30,24 @@ namespace Alg_Lab_6.Model.FolderHashTable
             int hashKey = hashFunc.Hash(key, size, attemp);
             while (true)
             {
-                if (hashKey == massive.Length || massive[hashKey].key.Equals(key))
+                if (hashKey >= massive.Length || attemp > size)
                 {
                     return false;
                 }
                 if (massive[hashKey] is null || massive[hashKey].isRemove)
                 {
                     massive[hashKey] = new ItemHash<T>(key, value);
+                    clasters.Add(attemp);
                     return true;
                 }
-                
+                if(massive[hashKey].key.Equals(key))
+                {
+                    return false;
+                }
+
                 hashKey = hashFunc.Hash(key, size, ++attemp);
             }
+            
         }
 
         public T GetElement(int key)
@@ -93,19 +100,28 @@ namespace Alg_Lab_6.Model.FolderHashTable
         {
             size = size * 2;
             ItemHash<T>[] newMassive = new ItemHash<T>[size];
+            clasters.Clear();
 
             foreach (ItemHash<T> item in massive)
             {
                 int attemp = 0;
-                int hashKey = hashFunc.Hash(item.key, size, attemp);//?
-                while (true)
-                {
-                    if (massive[hashKey] is null || massive[hashKey].isRemove)
+                if (item is not null)
+                { 
+                    int hashKey = hashFunc.Hash(item.key, size, attemp);
+                    while (true)
                     {
-                        newMassive[hashKey] = new ItemHash<T>(hashKey, item.value);
-                        break;
+                        if (newMassive[hashKey] is null || newMassive[hashKey].isRemove)
+                        {
+                            newMassive[hashKey] = new ItemHash<T>(hashKey, item.value);
+                            clasters.Add(attemp);
+                            break;
+                        }
+                        if (attemp > size)
+                        {
+                            break;
+                        }
+                        hashKey = hashFunc.Hash(item.key, size, ++attemp);
                     }
-                    hashKey = hashFunc.Hash(item.key, size, ++attemp);
                 }
             }
             massive = newMassive;
@@ -127,18 +143,11 @@ namespace Alg_Lab_6.Model.FolderHashTable
         public int MaxClusterL()
         {
             int max = 0;
-            int count = 0;
-            foreach(ItemHash<T> item in massive)
+            foreach(int claster in clasters)
             {
-                if(item is not null)
+                if(claster > max)
                 {
-                    count++;
-                }
-                else
-                {
-                    if(count > max)
-                        max = count;
-                    count = 0;
+                    max = claster;
                 }
             }
             return max;
