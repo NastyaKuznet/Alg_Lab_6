@@ -33,11 +33,9 @@ namespace Alg_Lab_6.Model.FolderHashTable
             {
                 if (hashKey >= massive.Length || attemp > size)
                 {
-                    ResizeTable();
-                    Add(key, value);
-                    return true;
+                    return false;
                 }
-                if (massive[hashKey] is null || massive[hashKey].isRemove)
+                if (massive[hashKey] is null || massive[hashKey].isRemove || massive[hashKey] is not null && massive[hashKey].key.Equals(key))
                 {
                     massive[hashKey] = new ItemHash<T>(key, value);
                     clasters.Add(attemp);
