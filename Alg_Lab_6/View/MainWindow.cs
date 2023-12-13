@@ -45,9 +45,9 @@ namespace Alg_Lab_6.View
             Console.WriteLine("_ Хэш-таблица - метод разрешения коллизий методом цепочек _");
             Console.WriteLine("1. Метод деления");
             Console.WriteLine("2. Метод умножения");
-            Console.WriteLine("3. Собственная хэщ-функция - BitPiFunc");
-            Console.WriteLine("4. Собственная хэщ-функция - BitShifXor");
-            Console.WriteLine("5. Собственная хэщ-функция - StartAndLenghtMod");
+            Console.WriteLine("3. Собственная хэш-функция - BitPiFunc");
+            Console.WriteLine("4. Собственная хэш-функция - BitShifXor");
+            Console.WriteLine("5. Собственная хэш-функция - StartAndLenghtMod");
             Console.WriteLine("6. Назад");
             Console.WriteLine();
             Console.WriteLine("Напишите нужную команду:");
@@ -106,8 +106,8 @@ namespace Alg_Lab_6.View
             Console.WriteLine("1. Линейное исследование");
             Console.WriteLine("2. Квадратичное исследование");
             Console.WriteLine("3. Двойное хэширование");
-            Console.WriteLine("4. Собственная хэщ-функция - DivMinusAtempt");
-            Console.WriteLine("5. Собственная хэщ-функция - ThridHashingOperation");
+            Console.WriteLine("4. Собственная хэш-функция - DivMinusAtempt");
+            Console.WriteLine("5. Собственная хэш-функция - ThridHashingOperation");
             Console.WriteLine("6. Назад");
             Console.WriteLine();
             Console.WriteLine("Напишите нужную команду:");

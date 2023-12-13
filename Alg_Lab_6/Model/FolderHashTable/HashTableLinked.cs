@@ -180,6 +180,10 @@ namespace Alg_Lab_6.Model.FolderHashTable
                             printer.PrintCell(item.key.ToString() + "|" + item.value.ToString(), lenght, (lenght + 8) * count, i * 3 + 1, ConsoleColor.Green);
                         count += 1;
                     }
+                    if (massive[i].Count == 0)
+                    {
+                        printer.PrintCell("null", lenght, (lenght + 8) * count, i * 3 + 1, ConsoleColor.White);
+                    }
                 }
                 else
                 {
