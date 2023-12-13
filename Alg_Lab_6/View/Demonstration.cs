@@ -1,9 +1,11 @@
 ﻿using Alg_Lab_6.Model;
 using Alg_Lab_6.Model.FolderHashTable;
 using Alg_Lab_6.Model.FolderHashTable.FolderHashFunc.AdressFunc;
+using Alg_Lab_6.Model.FolderHashTable.FolderHashFunc.Interface;
 using Alg_Lab_6.Model.FolderHashTable.FolderHashFunc.LinkFunc;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,19 +16,114 @@ namespace Alg_Lab_6.View
     {
         public void Demonstrate()
         {
-            int count = 10000;
-            ShiftMinusAtemptFunc func = new ShiftMinusAtemptFunc();
-            func.auxiliaryHashFunc = new StartAndLenghtModFunc();
-            //func.auxiliaryHashFunc2 = new StartAndLenghtModFunc();
+            int count = 6;
+            DivisionFunc func = new DivisionFunc();
+            //func.auxiliaryHashFunc1 = new StartAndLenghtModFunc();
+            //func.auxiliaryHashFunc2 = new DivisionFunc();
+            //func.auxiliaryHashFunc3 = new BitShifXorFunc();
             //func.Const = count;
-            HashTableAdress<int> hashTableLinkedList = new HashTableAdress<int>(count, func);
+            HashTableLinked<int> hashTableLinkedList = new HashTableLinked<int>(count, func);
+            
             RandomItemHash random = new RandomItemHash();
-            SetMassiveInHashTable(hashTableLinkedList, random.DoRandomRange(new ItemHash<int>[10000], -100000, 100000));
-            Console.WriteLine(hashTableLinkedList.GetFillFactor());
-            Console.WriteLine(hashTableLinkedList.MaxClusterL());
+            SetMassiveInHashTable(hashTableLinkedList, random.DoRandomRange(new ItemHash<int>[10], -1000, 1000));
+            hashTableLinkedList.Print(10);
+            Console.ReadKey();
+            hashTableLinkedList.Add(9, 1);
+            hashTableLinkedList.Print(10);
+            //Console.WriteLine(hashTableLinkedList.GetFillFactor());
+            //Console.WriteLine(hashTableLinkedList.MaxClusterL());
             //Console.WriteLine(hashTableLinkedList.MaxLenghtList());
             //Console.WriteLine(hashTableLinkedList.MinLenghtList());
             //сравнительный анализ сделаю наверное в виде таблички
+        }
+
+        public void DemonstrateLinkBase(HashTableLinked<int> hashTableLinkedList, int count1)
+        {
+            int start = -1000;
+            int finish = 1000;
+            
+
+            RandomItemHash random = new RandomItemHash();
+            SetMassiveInHashTable(hashTableLinkedList, random.DoRandomRange(new ItemHash<int>[count1], start, finish));
+
+            Console.Clear();
+            Console.WriteLine("ДЕМОНСТРАЦИЯ ИДЕТ ПО НАЖАТИЮ ЛЮБОЙ КЛАВИШИ В ПОРЯДКЕ: ДОБАВЛЕНИЕ ЭЛЕМЕНТА, УДАЛЕНИЕ ЭЛЕМЕНТА, ПОЛУЧЕНИЕ ЭЛЕМЕНТА");
+            Console.WriteLine("нажмите любую клавишу, чтобы продолжить");
+            Console.ReadKey();
+            Console.Clear();
+            Console.WriteLine("ДОБАВЛЕНИЕ ДО");
+            Console.WriteLine("нажмите любую клавишу, чтобы продолжить");
+            Console.ReadKey();
+            Console.Clear();
+            hashTableLinkedList.Print(10);
+            Console.ReadKey();
+            Console.Clear();
+            Console.WriteLine("ДОБАВЛЕНИЕ ПОСЛЕ: (9, 12), (6, 50)");
+            Console.WriteLine("нажмите любую клавишу, чтобы продолжить");
+            Console.ReadKey();
+            Console.Clear();
+            hashTableLinkedList.Add(9, 12);
+            hashTableLinkedList.Add(6, 50);
+            hashTableLinkedList.Print(10, new int[2] {9, 6}, new int[2] {12, 50 });
+            Console.ReadKey();
+            Console.Clear();
+            Console.WriteLine($"УДАЛЕНИЕ ПОСЛЕ: (9, 12) -> {hashTableLinkedList.Remove(9)}");
+            Console.WriteLine($"УДАЛЕНИЕ ПОСЛЕ: (2, 324) -> {hashTableLinkedList.Remove(2)}");
+            Console.WriteLine("нажмите любую клавишу, чтобы продолжить");
+            Console.ReadKey();
+            Console.Clear();
+            hashTableLinkedList.Print(10);
+            Console.ReadKey();
+            Console.Clear();
+            Console.WriteLine($"ПОЛУЧЕНИЕ: КЛЮЧ - 9 -> ЗНАЧЕНИЕ {hashTableLinkedList.GetElement(9)}");
+            Console.WriteLine("нажмите любую клавишу, чтобы продолжить");
+            Console.WriteLine($"ПОЛУЧЕНИЕ: КЛЮЧ - 6 -> ЗНАЧЕНИЕ {hashTableLinkedList.GetElement(6)}");
+            Console.WriteLine("нажмите любую клавишу, чтобы продолжить");
+            Console.ReadKey();
+        }
+
+        public void DemonstrateAdressBase(HashTableAdress<int> hashTableLinkedList, int count1)
+        {
+            int start = -1000;
+            int finish = 1000;
+
+
+            RandomItemHash random = new RandomItemHash();
+            SetMassiveInHashTable(hashTableLinkedList, random.DoRandomRange(new ItemHash<int>[count1], start, finish));
+
+            Console.Clear();
+            Console.WriteLine("ДЕМОНСТРАЦИЯ ИДЕТ ПО НАЖАТИЮ ЛЮБОЙ КЛАВИШИ В ПОРЯДКЕ: ДОБАВЛЕНИЕ ЭЛЕМЕНТА, УДАЛЕНИЕ ЭЛЕМЕНТА, ПОЛУЧЕНИЕ ЭЛЕМЕНТА");
+            Console.WriteLine("нажмите любую клавишу, чтобы продолжить");
+            Console.ReadKey();
+            Console.Clear();
+            Console.WriteLine("ДОБАВЛЕНИЕ ДО");
+            Console.WriteLine("нажмите любую клавишу, чтобы продолжить");
+            Console.ReadKey();
+            Console.Clear();
+            hashTableLinkedList.Print(10);
+            Console.ReadKey();
+            Console.Clear();
+            Console.WriteLine("ДОБАВЛЕНИЕ ПОСЛЕ: (9, 12), (6, 50)");
+            Console.WriteLine("нажмите любую клавишу, чтобы продолжить");
+            Console.ReadKey();
+            Console.Clear();
+            hashTableLinkedList.Add(9, 12);
+            hashTableLinkedList.Add(6, 50);
+            hashTableLinkedList.Print(10, new int[2] { 9, 6 }, new int[2] { 12, 50 });
+            Console.ReadKey();
+            Console.Clear();
+            Console.WriteLine($"УДАЛЕНИЕ ПОСЛЕ: 9 -> {hashTableLinkedList.Remove(9)}");
+            Console.WriteLine($"УДАЛЕНИЕ ПОСЛЕ: 2 -> {hashTableLinkedList.Remove(2)}");
+            Console.WriteLine("нажмите любую клавишу, чтобы продолжить");
+            Console.ReadKey();
+            Console.Clear();
+            hashTableLinkedList.Print(10);
+            Console.ReadKey();
+            Console.Clear();
+            Console.WriteLine($"ПОЛУЧЕНИЕ: КЛЮЧ - 9 -> ЗНАЧЕНИЕ {hashTableLinkedList.GetElement(9)}");
+            Console.WriteLine($"ПОЛУЧЕНИЕ: КЛЮЧ - 6 -> ЗНАЧЕНИЕ {hashTableLinkedList.GetElement(6)}");
+            Console.WriteLine("нажмите любую клавишу, чтобы продолжить");
+            Console.ReadKey();
         }
 
         private void SetMassiveInHashTable(HashTableLinked<int> hashTable, ItemHash<int>[] items)
@@ -36,8 +133,8 @@ namespace Alg_Lab_6.View
             {
                 
                 hashTable.Add(item.key, item.value);
-                count++;
-                Console.WriteLine(count);
+                //count++;
+                //Console.WriteLine(count);
             }
         }
 
@@ -47,8 +144,8 @@ namespace Alg_Lab_6.View
             foreach (ItemHash<int> item in items)
             {
                 hashTable.Add(item.key, item.value);
-                count++;
-                Console.WriteLine(count);
+                //count++;
+                //Console.WriteLine(count);
             }
         }
     }

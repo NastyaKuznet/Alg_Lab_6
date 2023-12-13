@@ -17,7 +17,7 @@ namespace Alg_Lab_6.Model.FolderHashTable.FolderHashFunc.AdressFunc
         public int Hash(int key, int size, int attempt)
         {
             return (int)Math.Abs((auxiliaryHashFunc1.Hash(key, size) + attempt * auxiliaryHashFunc2.Hash(key, size) 
-                - Math.Pow(attempt, 2) * auxiliaryHashFunc3.Hash(key, size))) % size;
+                - Math.Pow(attempt, 2) * auxiliaryHashFunc3.Hash(key, size)) % size);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Alg_Lab_6.Model.FolderHashTable.FolderHashFunc.Interface;
 using Alg_Lab_6.Model.FolderLinkedList;
+using Alg_Lab_6.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +33,9 @@ namespace Alg_Lab_6.Model.FolderHashTable
             {
                 if (hashKey >= massive.Length || attemp > size)
                 {
-                    return false;
+                    CheckSize();
+                    Add(key, value);
+                    return true;
                 }
                 if (massive[hashKey] is null || massive[hashKey].isRemove)
                 {
@@ -40,14 +43,8 @@ namespace Alg_Lab_6.Model.FolderHashTable
                     clasters.Add(attemp);
                     return true;
                 }
-                if(massive[hashKey].key.Equals(key))
-                {
-                    return false;
-                }
-
                 hashKey = hashFunc.Hash(key, size, ++attemp);
             }
-            
         }
 
         public T GetElement(int key)
@@ -74,13 +71,13 @@ namespace Alg_Lab_6.Model.FolderHashTable
             int hashKey = hashFunc.Hash(key, size, attempt);
             while (true)
             {
-                if (hashKey == massive.Length)
+                if (hashKey >= massive.Length)
                 {
                     return false;
                 }
-                if (massive[hashKey].key.Equals(key))
+                if(massive[hashKey] != null && massive[hashKey].key.Equals(key))
                 {
-                    if (hashKey == massive.Length - 1 || massive[hashKey++] is null)
+                    if (hashKey == massive.Length - 1 || massive[hashKey + 1] is null)
                         massive[hashKey] = null;
                     else
                         massive[hashKey].isRemove = true;
@@ -151,6 +148,42 @@ namespace Alg_Lab_6.Model.FolderHashTable
                 }
             }
             return max;
+        }
+
+        public void Print(int lenght)
+        {
+            Printer printer = new Printer();
+            for (int i = 0; i < massive.Length; i++)
+            {
+                printer.PrintCell(i.ToString(), lenght, 0, i * 3 + 1, ConsoleColor.DarkRed);
+
+                int count = 1;
+                if (massive[i] is not null && !massive[i].isRemove)
+                    printer.PrintCell(massive[i].key.ToString() + "|" + massive[i].value.ToString(), lenght, lenght * count + 6, i * 3 + 1, ConsoleColor.Green);
+                else if (massive[i] is not null && massive[i].isRemove)
+                    printer.PrintCell("Remove", lenght, lenght * count + 6, i * 3 + 1, ConsoleColor.Cyan);
+                else
+                    printer.PrintCell("null", lenght, lenght * count + 6, i * 3 + 1, ConsoleColor.White);
+            }
+        }
+
+        public void Print(int lenght,int[] keySelected, T[] valueSelected)
+        {
+            Printer printer = new Printer();
+            for (int i = 0; i < massive.Length; i++)
+            {
+                printer.PrintCell(i.ToString(), lenght, 0, i * 3 + 1, ConsoleColor.DarkRed);
+
+                int count = 1;
+                if (massive[i] is not null && !massive[i].isRemove && keySelected.Contains(massive[i].key) && valueSelected.Contains(massive[i].value))
+                    printer.PrintCell(massive[i].key.ToString() + "|" + massive[i].value.ToString(), lenght, lenght * count + 6, i * 3 + 1, ConsoleColor.Red);
+                else if(massive[i] is not null && !massive[i].isRemove)
+                    printer.PrintCell(massive[i].key.ToString() + "|" + massive[i].value.ToString(), lenght, lenght * count + 6, i * 3 + 1, ConsoleColor.Green);
+                else if (massive[i] is not null && massive[i].isRemove)
+                    printer.PrintCell("Remove", lenght, lenght * count + 6, i * 3 + 1, ConsoleColor.Cyan);
+                else
+                    printer.PrintCell("null", lenght, lenght * count + 6, i * 3 + 1, ConsoleColor.White);
+            }
         }
     }
 }

@@ -20,7 +20,6 @@ namespace Alg_Lab_6.Model
             {
                 int key = GetUnicKey(from, to);
                 itemsHash[i] = new ItemHash<int>(key, random.Next(from, to));
-                Console.WriteLine($"{i} r");
             }
             return itemsHash;
         }

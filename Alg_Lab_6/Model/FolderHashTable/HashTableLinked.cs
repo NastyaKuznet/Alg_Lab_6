@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Alg_Lab_6.Model.FolderLinkedList;
 using System.ComponentModel.DataAnnotations.Schema;
 using Alg_Lab_6.Model.FolderHashTable.FolderHashFunc.Interface;
+using Alg_Lab_6.View;
 
 namespace Alg_Lab_6.Model.FolderHashTable
 {
@@ -136,6 +137,55 @@ namespace Alg_Lab_6.Model.FolderHashTable
                 }
             }
             return min;
+        }
+
+        public void Print(int lenght)
+        {
+            Printer printer = new Printer();
+            for (int i = 0; i < massive.Length; i++)
+            {
+                printer.PrintCell(i.ToString(), lenght, 0, i * 3 + 1, ConsoleColor.DarkRed);
+
+                int count = 1;
+                if (massive[i] is not null)
+                {
+                    foreach (ItemHash<T> item in massive[i])
+                    {
+                        printer.PrintCell(item.key.ToString() + "|" + item.value.ToString(), lenght, (lenght + 8) * count, i * 3 + 1, ConsoleColor.Green);
+                        count += 1;
+                    }
+                }
+                else
+                {
+                    printer.PrintCell("null", lenght, (lenght + 8) * count, i * 3 + 1, ConsoleColor.White);
+                }
+            }
+        }
+
+        public void Print(int lenght, int[] keySelected, T[] valueSelected)
+        {
+            Printer printer = new Printer();
+            for (int i = 0; i < massive.Length; i++)
+            {
+                printer.PrintCell(i.ToString(), lenght, 0, i * 3 + 1, ConsoleColor.DarkRed);
+
+                int count = 1;
+                if (massive[i] is not null)
+                {
+                    foreach (ItemHash<T> item in massive[i])
+                    {
+                        if(keySelected.Contains(item.key) && valueSelected.Contains(item.value))
+                            printer.PrintCell(item.key.ToString() + "|" + item.value.ToString(), lenght, (lenght + 8) * count, i * 3 + 1, ConsoleColor.Red);
+                        else
+                            printer.PrintCell(item.key.ToString() + "|" + item.value.ToString(), lenght, (lenght + 8) * count, i * 3 + 1, ConsoleColor.Green);
+                        count += 1;
+                    }
+                }
+                else
+                {
+                    printer.PrintCell("null", lenght, (lenght + 8) * count, i * 3 + 1, ConsoleColor.White);
+                }
+            }
         }
     }
 }

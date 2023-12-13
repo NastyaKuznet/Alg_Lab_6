@@ -14,9 +14,7 @@ namespace Alg_Lab_6.Model.FolderHashTable.FolderHashFunc.AdressFunc
         public IHashFuncLink auxiliaryHashFunc2 = new DivisionFunc();
         public int Hash(int key, int size, int attempt)
         {
-            Console.WriteLine($"{key} ^ {attempt}");
             return (auxiliaryHashFunc1.Hash(Math.Abs(key), size) + attempt * auxiliaryHashFunc2.Hash(Math.Abs(key), size - 1)) % size;
-
         }
     }
 }

@@ -6,9 +6,10 @@ namespace Alg_Lab_6
     {
         static void Main(string[] args)
         {
-            Demonstration demonstration= new Demonstration();
-            demonstration.Demonstrate();
-             
+            //new PrinterTable().PrintCell("177", 5, 5, 5);
+            //Demonstration demonstration = new Demonstration();
+            //demonstration.Demonstrate();
+            new MainWindow().Do();
         }
     }
 }
