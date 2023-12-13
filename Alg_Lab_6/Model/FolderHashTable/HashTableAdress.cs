@@ -33,7 +33,7 @@ namespace Alg_Lab_6.Model.FolderHashTable
             {
                 if (hashKey >= massive.Length || attemp > size)
                 {
-                    CheckSize();
+                    ResizeTable();
                     Add(key, value);
                     return true;
                 }
@@ -71,7 +71,7 @@ namespace Alg_Lab_6.Model.FolderHashTable
             int hashKey = hashFunc.Hash(key, size, attempt);
             while (true)
             {
-                if (hashKey >= massive.Length)
+                if (hashKey >= massive.Length || attempt > massive.Length)
                 {
                     return false;
                 }
