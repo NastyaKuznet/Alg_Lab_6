@@ -12,7 +12,7 @@ namespace Alg_Lab_6.Model.FolderHashTable.FolderHashFunc.LinkFunc
     {
         public int Hash(int key, int size)
         {
-            return Math.Abs(key) % size;
+            return Math.Abs(key % size);
         }
     }
 }

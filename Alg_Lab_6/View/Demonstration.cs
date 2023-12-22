@@ -16,22 +16,32 @@ namespace Alg_Lab_6.View
     {
         public void Demonstrate()
         {
-            int count = 6;
-            DivisionFunc func = new DivisionFunc();
+            int count = 1000;
+
+            PolynomialHashFunc polynomialHash = new PolynomialHashFunc();
+            PerlinNoiseFunc perlinNoise = new PerlinNoiseFunc();
+            SHA1Func sha1 = new SHA1Func();
+            DivisionFunc divisionFunc = new DivisionFunc();
+            MultiplicationFunc multiplicationFunc = new MultiplicationFunc();
             //func.auxiliaryHashFunc1 = new StartAndLenghtModFunc();
             //func.auxiliaryHashFunc2 = new DivisionFunc();
             //func.auxiliaryHashFunc3 = new BitShifXorFunc();
             //func.Const = count;
-            HashTableLinked<int> hashTableLinkedList = new HashTableLinked<int>(count, func);
-            
+
+            //HashTableLinked<int> hashTableLinkedList = new HashTableLinked<int>(count, func);
+
+            DoubleHashingFunc func = new DoubleHashingFunc();
+            func.auxiliaryHashFunc1 = sha1;
+            func.auxiliaryHashFunc2 = multiplicationFunc;
+            HashTableAdress<int> hashTableadress = new HashTableAdress<int>(count, func);
             RandomItemHash random = new RandomItemHash();
-            SetMassiveInHashTable(hashTableLinkedList, random.DoRandomRange(new ItemHash<int>[10], -1000, 1000));
-            hashTableLinkedList.Print(10);
-            Console.ReadKey();
-            hashTableLinkedList.Add(9, 1);
-            hashTableLinkedList.Print(10);
-            //Console.WriteLine(hashTableLinkedList.GetFillFactor());
-            //Console.WriteLine(hashTableLinkedList.MaxClusterL());
+            SetMassiveInHashTable(hashTableadress, random.DoRandomRange(new ItemHash<int>[100000], -100000, 100000));
+            //hashTableLinkedList.Print(10);
+            //Console.ReadKey();
+            //hashTableLinkedList.Add(9, 1);
+            //hashTableLinkedList.Print(10);
+            Console.WriteLine(hashTableadress.GetFillFactor());
+            Console.WriteLine(hashTableadress.MaxClusterL());
             //Console.WriteLine(hashTableLinkedList.MaxLenghtList());
             //Console.WriteLine(hashTableLinkedList.MinLenghtList());
             //сравнительный анализ сделаю наверное в виде таблички
@@ -133,8 +143,8 @@ namespace Alg_Lab_6.View
             {
                 
                 hashTable.Add(item.key, item.value);
-                //count++;
-                //Console.WriteLine(count);
+                count++;
+                Console.WriteLine(count);
             }
         }
 
@@ -144,8 +154,8 @@ namespace Alg_Lab_6.View
             foreach (ItemHash<int> item in items)
             {
                 hashTable.Add(item.key, item.value);
-                //count++;
-                //Console.WriteLine(count);
+                count++;
+                Console.WriteLine(count);
             }
         }
     }
