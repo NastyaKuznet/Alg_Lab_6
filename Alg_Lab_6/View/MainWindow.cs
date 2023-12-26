@@ -45,10 +45,11 @@ namespace Alg_Lab_6.View
             Console.WriteLine("_ Хэш-таблица - метод разрешения коллизий методом цепочек _");
             Console.WriteLine("1. Метод деления");
             Console.WriteLine("2. Метод умножения");
-            Console.WriteLine("3. Собственная хэш-функция - BitPiFunc");
+            Console.WriteLine("3. Собственная хэш-функция - PolynomialHashFunc");
             Console.WriteLine("4. Собственная хэш-функция - BitShifXor");
-            Console.WriteLine("5. Собственная хэш-функция - StartAndLenghtMod");
-            Console.WriteLine("6. Назад");
+            Console.WriteLine("5. Собственная хэш-функция - PerlinNoiseFunc");
+            Console.WriteLine("6. Хэш-функция - SHA1Func");
+            Console.WriteLine("7. Назад");
             Console.WriteLine();
             Console.WriteLine("Напишите нужную команду:");
             Command2();
@@ -73,7 +74,7 @@ namespace Alg_Lab_6.View
                     break;
                 case ("3"):
                     int count3 = 6;
-                    BitPiFunc func3 = new BitPiFunc();
+                    PolynomialHashFunc func3 = new PolynomialHashFunc();
                     HashTableLinked<int> hashTableLinkedList3 = new HashTableLinked<int>(count3, func3);
                     new Demonstration().DemonstrateLinkBase(hashTableLinkedList3, 7);
                     break;
@@ -85,11 +86,17 @@ namespace Alg_Lab_6.View
                     break;
                 case ("5"):
                     int count5 = 6;
-                    StartAndLenghtModFunc func5 = new StartAndLenghtModFunc();
+                    PerlinNoiseFunc func5 = new PerlinNoiseFunc();
                     HashTableLinked<int> hashTableLinkedList5 = new HashTableLinked<int>(count5, func5);
                     new Demonstration().DemonstrateLinkBase(hashTableLinkedList5, 10);
                     break;
                 case ("6"):
+                    int count6 = 6;
+                    SHA1Func func6 = new SHA1Func();
+                    HashTableLinked<int> hashTableLinkedList6 = new HashTableLinked<int>(count6, func6);
+                    new Demonstration().DemonstrateLinkBase(hashTableLinkedList6, 10);
+                    break;
+                case ("7"):
                     Do();
                     break;
                 default:
