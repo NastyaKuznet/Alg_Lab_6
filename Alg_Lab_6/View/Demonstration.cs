@@ -77,8 +77,8 @@ namespace Alg_Lab_6.View
             hashTableLinkedList.Print(10, new int[2] {9, 6}, new int[2] {12, 50 });
             Console.ReadKey();
             Console.Clear();
-            Console.WriteLine($"УДАЛЕНИЕ ПОСЛЕ: (9, 12) -> {hashTableLinkedList.Remove(9)}");
-            Console.WriteLine($"УДАЛЕНИЕ ПОСЛЕ: (2, 324) -> {hashTableLinkedList.Remove(2)}");
+            Console.WriteLine($"УДАЛЕНИЕ ПОСЛЕ: (9) -> {hashTableLinkedList.Remove(9)}");
+            Console.WriteLine($"УДАЛЕНИЕ ПОСЛЕ: (2) -> {hashTableLinkedList.Remove(2)}");
             Console.WriteLine("нажмите любую клавишу, чтобы продолжить");
             Console.ReadKey();
             Console.Clear();

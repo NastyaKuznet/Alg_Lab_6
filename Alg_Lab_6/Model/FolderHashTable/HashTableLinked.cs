@@ -155,7 +155,7 @@ namespace Alg_Lab_6.Model.FolderHashTable
                         count += 1;
                     }
                 }
-                else
+                if (massive[i] is null || massive[i].Count == 0)
                 {
                     printer.PrintCell("null", lenght, (lenght + 8) * count, i * 3 + 1, ConsoleColor.White);
                 }
@@ -185,7 +185,7 @@ namespace Alg_Lab_6.Model.FolderHashTable
                         printer.PrintCell("null", lenght, (lenght + 8) * count, i * 3 + 1, ConsoleColor.White);
                     }
                 }
-                else
+                if (massive[i] is null || massive[i].Count == 0)
                 {
                     printer.PrintCell("null", lenght, (lenght + 8) * count, i * 3 + 1, ConsoleColor.White);
                 }
